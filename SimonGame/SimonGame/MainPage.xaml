@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimonGame.MainPage">
+
+    <StackLayout>
+        
+        <Frame BackgroundColor="black" Padding="24" CornerRadius="0">
+            <Label Text="SIMON" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        
+        <Button 
+            x:Name="playButton"
+            BackgroundColor="LightGreen" 
+            Clicked="PlayButtonClicked"
+            Text="Play" 
+        />
+        
+        <Grid Margin="20,20,20,20">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"></RowDefinition>
+                <RowDefinition Height="250"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button 
+                x:Name="lightGreenButton" 
+                BackgroundColor="LightGreen" 
+                CornerRadius="50"
+                Grid.Column="0" 
+                Grid.Row="0"
+                Text="Green"
+            />
+            <Button 
+                x:Name="greenButton" 
+                BackgroundColor="Green" 
+                Clicked="GreenButtonClicked"
+                CornerRadius="50"
+                Grid.Column="0" 
+                Grid.Row="0"
+                Text="Green"
+            />
+            
+
+            <Button 
+                x:Name="redButton" 
+                BackgroundColor="Red" 
+                Clicked="RedButtonClicked"
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="Red"
+            />
+            
+            <Button 
+                x:Name="yellowButton" 
+                BackgroundColor="Yellow" 
+                Clicked="YellowButtonClicked"
+                Grid.Row="1" 
+                Grid.Column="0"
+                Text="Yellow"
+            />
+            
+            <Button 
+                x:Name="blueButton" 
+                BackgroundColor="Blue" 
+                Clicked="BlueButtonClicked"
+                Grid.Row="1" 
+                Grid.Column="1"
+                Text="Blue"
+            />
+            
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
