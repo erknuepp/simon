@@ -11,51 +11,52 @@
 
     public partial class MainPage : ContentPage
     {
-        private List<Button> _buttons = new List<Button>();
+        private Button[] _buttons = new Button[4];
         private GameDriver _game;
         public MainPage()
         {
             InitializeComponent();
-            _buttons.Add(greenButton);
-            _buttons.Add(blueButton);
-            _buttons.Add(redButton);
-            _buttons.Add(yellowButton);
 
-            _game = new GameDriver();            
+            _buttons[0] = greenButton;
+            _buttons[1] = blueButton;
+            _buttons[2] = redButton;
+            _buttons[3] = yellowButton;
+
+            _game = new GameDriver(_buttons);            
         }
 
         public async void GreenButtonClicked(object sender, EventArgs e)
         {
-            _game.AddButton(sender as Button);
-            _ = StartAnimation();
+            ButtonClick(sender as Button);
         }
 
-        public void RedButtonClicked(object sender, EventArgs e)
+        public async void RedButtonClicked(object sender, EventArgs e)
         {
-            _game.AddButton(sender as Button);
+            ButtonClick(sender as Button);
         }
 
-        public void YellowButtonClicked(object sender, EventArgs e)
+        public async void YellowButtonClicked(object sender, EventArgs e)
         {
-            _game.AddButton(sender as Button);
+            ButtonClick(sender as Button);
         }
 
-        public void BlueButtonClicked(object sender, EventArgs e)
+        public async void BlueButtonClicked(object sender, EventArgs e)
         {
-            _game.AddButton(sender as Button);
+            ButtonClick(sender as Button);
         }
 
-        public void PlayButtonClicked(object sender, EventArgs e)
+        public async void PlayButtonClicked(object sender, EventArgs e)
         {
             playButton.Text = playButton.Text == "Play" ? "Pause Game" : "Play";
+            _ = _game.RunSequence();
         }
 
-        private async Task StartAnimation()
+        private async void ButtonClick(Button b)
         {
-            await Task.Delay(200);
-            await greenButton.FadeTo(0, 250);
-            await Task.Delay(200);
-            await greenButton.FadeTo(1, 250);
+            _game.AddButton(b);
+            _ = _game.ButtonGlowAnimation(b);
         }
+
+        
     }
 }

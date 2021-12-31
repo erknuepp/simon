@@ -29,7 +29,6 @@
             </Grid.RowDefinitions>
 
             <Button 
-                x:Name="lightGreenButton" 
                 BackgroundColor="LightGreen" 
                 CornerRadius="50"
                 Grid.Column="0" 
@@ -45,30 +44,56 @@
                 Grid.Row="0"
                 Text="Green"
             />
-            
+
+            <Button 
+                BackgroundColor="LightSalmon" 
+                CornerRadius="50"
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="Red"
+            />
 
             <Button 
                 x:Name="redButton" 
                 BackgroundColor="Red" 
                 Clicked="RedButtonClicked"
+                CornerRadius="50"
                 Grid.Row="0"
                 Grid.Column="1"
                 Text="Red"
             />
-            
+
             <Button 
-                x:Name="yellowButton" 
-                BackgroundColor="Yellow" 
-                Clicked="YellowButtonClicked"
+                BackgroundColor="LightYellow" 
+                CornerRadius="50"
                 Grid.Row="1" 
                 Grid.Column="0"
                 Text="Yellow"
             />
             
             <Button 
+                x:Name="yellowButton" 
+                BackgroundColor="Yellow" 
+                Clicked="YellowButtonClicked"
+                CornerRadius="50"
+                Grid.Row="1" 
+                Grid.Column="0"
+                Text="Yellow"
+            />
+
+            <Button 
+                BackgroundColor="LightBlue" 
+                CornerRadius="50"
+                Grid.Row="1" 
+                Grid.Column="1"
+                Text="Blue"
+            />
+            
+            <Button 
                 x:Name="blueButton" 
                 BackgroundColor="Blue" 
                 Clicked="BlueButtonClicked"
+                CornerRadius="50"
                 Grid.Row="1" 
                 Grid.Column="1"
                 Text="Blue"
