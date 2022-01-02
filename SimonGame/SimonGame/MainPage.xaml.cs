@@ -22,36 +22,38 @@
             _buttons[2] = redButton;
             _buttons[3] = yellowButton;
 
-            _game = new GameDriver(_buttons);            
+            _game = new GameDriver(_buttons);
+            _game.DisableButtons();
         }
 
         public async void GreenButtonClicked(object sender, EventArgs e)
         {
-            ButtonClick(sender as Button);
+            GameButtonClicked(sender as Button);
         }
 
         public async void RedButtonClicked(object sender, EventArgs e)
         {
-            ButtonClick(sender as Button);
+            GameButtonClicked(sender as Button);
         }
 
         public async void YellowButtonClicked(object sender, EventArgs e)
         {
-            ButtonClick(sender as Button);
+            GameButtonClicked(sender as Button);
         }
 
         public async void BlueButtonClicked(object sender, EventArgs e)
         {
-            ButtonClick(sender as Button);
+            GameButtonClicked(sender as Button);
         }
 
         public async void PlayButtonClicked(object sender, EventArgs e)
         {
             playButton.Text = playButton.Text == "Play" ? "Pause Game" : "Play";
             _ = _game.RunSequence();
+            _game.EnableButtons();
         }
 
-        private async void ButtonClick(Button b)
+        private async void GameButtonClicked(Button b)
         {
             _game.AddButton(b);
             _ = _game.ButtonGlowAnimation(b);
