@@ -5,7 +5,7 @@
 
     <StackLayout HorizontalOptions="Center">
         
-        <Frame BackgroundColor="black" Padding="24" CornerRadius="0">
+        <Frame BackgroundColor="black" Padding="24">
             <Label Text="SIMON" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
         
