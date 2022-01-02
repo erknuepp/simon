@@ -8,11 +8,13 @@
 
     internal sealed class GameDriver
     {
+        private const int initialSequenceLength = 3;
         private const int maxRoundLength = 20;
         private const int turnChangeDelayMilliseconds = 500;
 
-        private int _sequenceLength = 3;
-        private int _numberOfButtonPresses = 0;
+        private int _roundNumber;
+        private int _sequenceLength;
+        private int _numberOfButtonPresses;
 
         private Button[] _playerButtons = new Button[maxRoundLength];
         private Button[] _gameButtons = new Button[4];
@@ -30,6 +32,9 @@
         {
             _gameButtons = buttons;
             _sequenceButtons = new Button[_sequenceLength];
+            _sequenceLength = initialSequenceLength;
+            _numberOfButtonPresses = 0;
+            _roundNumber = 1;
         }
 
         internal void AddButton(Button button)
@@ -41,15 +46,23 @@
             if (isValidSequence)
             {
                 //TODO What to do is sequence is valid
-                //if has another turn i.e. _numberOfButtonsPress < _sequenceLength
-                //  return (wait for next sequence entry)
-                //else
-                //  go to next round
+                if (_numberOfButtonPresses < _sequenceLength)
+                {
+                    //  return (wait for next sequence entry)
+                }
+                else
+                {
+                    //  go to next round
+                    _roundNumber++;
+                    _sequenceLength++;
+                }
+
             }
             else
             {
-                //TODO What to do if sequence is invlid
-                //restart from round 1 turn 1
+                //TODO What to do if sequence is invalid
+                _roundNumber = 1;
+                _sequenceLength = initialSequenceLength;
             }
         }
 
