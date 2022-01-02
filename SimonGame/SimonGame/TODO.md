@@ -1,3 +1,4 @@
-﻿#List of things to do
+﻿# List of things to do
 
-#1 Create a Round class
+- Create a Round class
+- Should there be a timeout if you take too long to complete the sequence? Threads?
