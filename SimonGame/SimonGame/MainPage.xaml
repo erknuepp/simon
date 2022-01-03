@@ -6,13 +6,20 @@
     <StackLayout HorizontalOptions="Center">
         
         <Frame BackgroundColor="black" Padding="24">
-            <Label Text="SIMON" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Label 
+                FontSize="36"
+                HorizontalTextAlignment="Center" 
+                Text="SIMON" 
+                TextColor="White" 
+            />
         </Frame>
         
         <Button 
             x:Name="playButton"
             BackgroundColor="LightGreen" 
             Clicked="PlayButtonClicked"
+            CornerRadius="15"
+            Margin="200,0,200,20"
             Text="Play" 
         />
         
@@ -33,8 +40,10 @@
                 CornerRadius="50"
                 Grid.Column="0" 
                 Grid.Row="0"
+                Margin="10"
                 Text="Green"
             />
+            
             <Button 
                 x:Name="greenButton" 
                 BackgroundColor="Green" 
@@ -42,6 +51,7 @@
                 CornerRadius="50"
                 Grid.Column="0" 
                 Grid.Row="0"
+                Margin="20"
                 Text="Green"
             />
 
@@ -50,6 +60,7 @@
                 CornerRadius="50"
                 Grid.Row="0"
                 Grid.Column="1"
+                Margin="10"
                 Text="Red"
             />
 
@@ -60,6 +71,7 @@
                 CornerRadius="50"
                 Grid.Row="0"
                 Grid.Column="1"
+                Margin="20"
                 Text="Red"
             />
 
@@ -68,6 +80,7 @@
                 CornerRadius="50"
                 Grid.Row="1" 
                 Grid.Column="0"
+                Margin="10"
                 Text="Yellow"
             />
             
@@ -78,6 +91,7 @@
                 CornerRadius="50"
                 Grid.Row="1" 
                 Grid.Column="0"
+                Margin="20"
                 Text="Yellow"
             />
 
@@ -86,6 +100,7 @@
                 CornerRadius="50"
                 Grid.Row="1" 
                 Grid.Column="1"
+                Margin="10"
                 Text="Blue"
             />
             
@@ -96,11 +111,17 @@
                 CornerRadius="50"
                 Grid.Row="1" 
                 Grid.Column="1"
+                Margin="20"
                 Text="Blue"
             />
             
         </Grid>
-
+        <Label 
+            x:Name="roundLabel" 
+            FontSize="36"
+            HorizontalTextAlignment="Center" 
+            TextColor="White" 
+        />
     </StackLayout>
 
 </ContentPage>
