@@ -59,14 +59,12 @@
         internal async Task CapturePlayerSequenceTerm(Button button)
         {
             //TODO Detect when the player has entered the right sequence
-            //TODO If the player has the full correct sequence then either go immediatley to next round/turn
             _playerSequenceButtons[_numberOfTermsEntered++] = button;
-            Console.WriteLine(_playerSequenceButtons.ToString());
             _sequenceComparisionJaggedArray[1] = _playerSequenceButtons;
             if (IsValidSequence())
             {
                 
-                //TODO What to do is sequence is valid
+                //What to do if sequence is valid
                 if (_numberOfTermsEntered < _sequenceLength)
                 {
                     return; //(wait for next term entry)
@@ -83,15 +81,18 @@
                     _simonSequenceButtons = new Button[_sequenceLength];
                     _sequenceComparisionJaggedArray = new Button[2][];
                     _numberOfTermsEntered = 0;
+                    return;
                 }
             }
             else
             {
-                //TODO What to do if sequence is invalid - maybe flash the screen red
+                //TODO What to do if sequence is invalid
                 RoundNumber = initialRound;
+                DisableButtons();
+                await _playButton.FadeTo(1);
                 UpdateRoundLabelText();
                 _sequenceLength = initialSequenceLength;
-                
+                return;
             }
         }
 
@@ -113,9 +114,9 @@
 
         private bool IsValidSequence()
         {
-            for (int i = 0; i < _sequenceLength; i++)
+            for (int i = 0; i < _numberOfTermsEntered; i++)
             {
-                if (_sequenceComparisionJaggedArray[0][i] != _sequenceComparisionJaggedArray[1][i])
+                if (_sequenceComparisionJaggedArray[0][i].Text != _sequenceComparisionJaggedArray[1][i].Text)
                 {
                     return false;
                 }

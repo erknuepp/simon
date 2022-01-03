@@ -43,7 +43,6 @@
 
         public async void PlayButtonClicked(object sender, EventArgs e)
         {
-            //roundNumberLabel.Text = $"Round {_game.RoundNumber}";
             _ = _game.RunSequence();
             _game.EnableButtons();
             await playButton.FadeTo(0);

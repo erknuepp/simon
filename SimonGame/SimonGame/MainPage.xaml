@@ -120,6 +120,7 @@
             x:Name="roundNumberLabel" 
             FontSize="36"
             HorizontalTextAlignment="Center" 
+            Text="Round 1"
             TextColor="White" 
         />
     </StackLayout>
