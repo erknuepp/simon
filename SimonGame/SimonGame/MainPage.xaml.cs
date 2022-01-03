@@ -55,7 +55,7 @@
 
         private async void GameButtonClicked(Button b)
         {
-            _game.AddButton(b);
+            _game.CapturePlayerSequenceTerm(b);
             _ = _game.ButtonGlowAnimation(b);
         }
 

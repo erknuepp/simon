@@ -9,14 +9,14 @@
     internal sealed class GameDriver
     {
         private const int initialSequenceLength = 3;
-        private const int maxRoundLength = 20;
         private const int turnChangeDelayMilliseconds = 500;
+        private int _highScrore;
 
-        private int _roundNumber;
+        private Round _round;
         private int _sequenceLength;
         private int _numberOfButtonPresses;
 
-        private Button[] _playerButtons = new Button[maxRoundLength];
+        private Button[] _playerSequenceButtons;
         private Button[] _gameButtons = new Button[4];
         private Button[] _sequenceButtons;
 
@@ -28,40 +28,61 @@
         private Button[][] _sequenceComparisionJaggedArray =  new Button[2][];
 
 
-        public GameDriver(Button[] buttons)
+        public GameDriver(Button[] buttons, int highScrore = 0)
         {
             _gameButtons = buttons;
-            _sequenceButtons = new Button[_sequenceLength];
             _sequenceLength = initialSequenceLength;
+            _sequenceButtons = new Button[_sequenceLength];
+            _playerSequenceButtons = new Button[_sequenceLength];
             _numberOfButtonPresses = 0;
-            _roundNumber = 1;
+            _round = new Round(1);
+            _highScrore = highScrore;
         }
 
-        internal void AddButton(Button button)
+        internal async Task RunSequence()
         {
-            _playerButtons[_numberOfButtonPresses++] = button;
-            Console.WriteLine(_playerButtons.ToString());
-            _sequenceComparisionJaggedArray[1] = _playerButtons;
+            //TODO Disable clicking whilst sequence runs
+            for (int i = 0; i < _sequenceLength; i++)
+            {
+                var random = new Random();
+                var randomButton = _gameButtons[random.Next(0, 3)];
+                await ButtonGlowAnimation(randomButton);
+                _sequenceButtons[i] = randomButton;
+                await Task.Delay(turnChangeDelayMilliseconds); //This will give variable delay 
+            }
+            _sequenceComparisionJaggedArray[0] = _sequenceButtons;
+        }
+
+        internal async Task CapturePlayerSequenceTerm(Button button)
+        {
+            //TODO Detect when the player has entered the right sequence
+            //TODO If the player has the full correct sequence then either go immediatley to next round/turn
+            _playerSequenceButtons[_numberOfButtonPresses++] = button;
+            Console.WriteLine(_playerSequenceButtons.ToString());
+            _sequenceComparisionJaggedArray[1] = _playerSequenceButtons;
             var isValidSequence = IsValidSequence();
             if (isValidSequence)
             {
+                
                 //TODO What to do is sequence is valid
                 if (_numberOfButtonPresses < _sequenceLength)
                 {
-                    //  return (wait for next sequence entry)
+                    return; //(wait for next sequence entry)
                 }
                 else
                 {
                     //  go to next round
-                    _roundNumber++;
+                    
+                    _round.Number++;
                     _sequenceLength++;
+                    await RunSequence();
                 }
 
             }
             else
             {
-                //TODO What to do if sequence is invalid
-                _roundNumber = 1;
+                //TODO What to do if sequence is invalid - maybe flash the screen red
+                _round.Number = 1;
                 _sequenceLength = initialSequenceLength;
             }
         }
@@ -78,21 +99,9 @@
             return true;
         }
 
-        internal async Task RunSequence()
-        {
-            //TODO Disable clicking whilst sequence runs
-            for(int i = 0; i < _sequenceLength; i++)
-            {
-                var random = new Random();
-                var randomButton = _gameButtons[random.Next(0, 3)];
-                await ButtonGlowAnimation(randomButton);
-                _sequenceButtons[i] = randomButton;
-                await Task.Delay(turnChangeDelayMilliseconds); //This will give the play 
-            }
-            _sequenceComparisionJaggedArray[0] = _sequenceButtons;
-        }
+        
 
-        public async Task ButtonGlowAnimation(Button button)
+        public async Task ButtonGlowAnimation(Button button) //TODO Possibly have this use generics?
         {
             //TODO Have the delay shrink on each round
             //TODO Add sound upon button gloom
