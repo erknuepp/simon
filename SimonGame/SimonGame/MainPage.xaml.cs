@@ -17,7 +17,7 @@
             _buttons[2] = redButton;
             _buttons[3] = yellowButton;
 
-            _game = new GameDriver(_buttons);
+            _game = new GameDriver(_buttons, playButton, roundNumberLabel);
             _game.DisableButtons();
         }
 
@@ -43,9 +43,10 @@
 
         public async void PlayButtonClicked(object sender, EventArgs e)
         {
-            roundLabel.Text = $"Round {_game.RoundNumber}";
+            //roundNumberLabel.Text = $"Round {_game.RoundNumber}";
             _ = _game.RunSequence();
             _game.EnableButtons();
+            await playButton.FadeTo(0);
         }
 
         private async void GameButtonClicked(Button b)

@@ -117,7 +117,7 @@
             
         </Grid>
         <Label 
-            x:Name="roundLabel" 
+            x:Name="roundNumberLabel" 
             FontSize="36"
             HorizontalTextAlignment="Center" 
             TextColor="White" 
