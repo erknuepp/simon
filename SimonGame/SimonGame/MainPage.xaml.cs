@@ -1,11 +1,6 @@
 ﻿namespace SimonGame
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using Xamarin.Forms;
 
@@ -48,7 +43,7 @@
 
         public async void PlayButtonClicked(object sender, EventArgs e)
         {
-            playButton.Text = playButton.Text == "Play" ? "Pause Game" : "Play";
+            roundLabel.Text = $"Round {_game.RoundNumber}";
             _ = _game.RunSequence();
             _game.EnableButtons();
         }
@@ -56,7 +51,7 @@
         private async void GameButtonClicked(Button b)
         {
             _game.CapturePlayerSequenceTerm(b);
-            _ = _game.ButtonGlowAnimation(b);
+            _ = _game.GloomAnimation(b);
         }
 
         
