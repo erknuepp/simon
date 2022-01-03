@@ -10,7 +10,6 @@
     {
         private const int initialSequenceLength = 3;
         private const int turnChangeDelayMilliseconds = 500;
-        private int _highScrore;
 
         private Round _round;
         private int _sequenceLength;
@@ -28,7 +27,7 @@
         private Button[][] _sequenceComparisionJaggedArray =  new Button[2][];
 
 
-        public GameDriver(Button[] buttons, int highScrore = 0)
+        public GameDriver(Button[] buttons)
         {
             _gameButtons = buttons;
             _sequenceLength = initialSequenceLength;
@@ -36,7 +35,6 @@
             _playerSequenceButtons = new Button[_sequenceLength];
             _numberOfButtonPresses = 0;
             _round = new Round(1);
-            _highScrore = highScrore;
         }
 
         internal async Task RunSequence()
