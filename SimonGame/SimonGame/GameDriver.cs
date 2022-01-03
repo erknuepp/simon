@@ -48,7 +48,7 @@
             //TODO Disable clicking whilst sequence runs
             for (int i = 0; i < _sequenceLength; i++)
             {
-                var randomButton = _gameButtons[new Random().Next(0, 3)];
+                var randomButton = _gameButtons[new Random().Next(0, 4)]; // 0 is inclusive 4 is exclusive
                 await GloomAnimation(randomButton);
                 _simonSequenceButtons[i] = randomButton;
                 await Task.Delay(turnChangeDelayMilliseconds); //This will give variable delay 
@@ -58,42 +58,44 @@
 
         internal async Task CapturePlayerSequenceTerm(Button button)
         {
-            //TODO Detect when the player has entered the right sequence
             _playerSequenceButtons[_numberOfTermsEntered++] = button;
             _sequenceComparisionJaggedArray[1] = _playerSequenceButtons;
             if (IsValidSequence())
             {
-                
-                //What to do if sequence is valid
+                // if sequence is valid and more terms to enter
                 if (_numberOfTermsEntered < _sequenceLength)
                 {
-                    return; //(wait for next term entry)
+                    return; // wait for next term entry
                 }
-                else
+                else // go to next round
                 {
-                    //  go to next round
+                    
                     RoundNumber++;
                     UpdateRoundLabelText();
                     _sequenceLength++;
-                    DisableButtons();
-                    await _playButton.FadeTo(1);
-                    _playerSequenceButtons = new Button[_sequenceLength];
-                    _simonSequenceButtons = new Button[_sequenceLength];
-                    _sequenceComparisionJaggedArray = new Button[2][];
-                    _numberOfTermsEntered = 0;
+                    await Reset();
                     return;
                 }
             }
             else
             {
-                //TODO What to do if sequence is invalid
+                // else if sequence is invalid reset
                 RoundNumber = initialRound;
-                DisableButtons();
-                await _playButton.FadeTo(1);
                 UpdateRoundLabelText();
                 _sequenceLength = initialSequenceLength;
+                await Reset();
                 return;
             }
+        }
+
+        private async Task Reset()
+        {
+            DisableButtons();
+            _playerSequenceButtons = new Button[_sequenceLength];
+            _simonSequenceButtons = new Button[_sequenceLength];
+            _sequenceComparisionJaggedArray = new Button[2][];
+            _numberOfTermsEntered = 0;
+            await _playButton.FadeTo(1);
         }
 
         private void UpdateRoundLabelText()
@@ -101,7 +103,7 @@
             _roundNumberLabel.Text = $"Round {RoundNumber}";
         }
 
-        internal async Task GloomAnimation(VisualElement visualElement)//TODO Possibly have this use generics?
+        internal async Task GloomAnimation(VisualElement visualElement)
         {
             await Task.Delay(100);
             await visualElement.FadeTo(opacity: 0);
