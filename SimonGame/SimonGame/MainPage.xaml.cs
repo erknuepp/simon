@@ -43,7 +43,7 @@
 
         public async void PlayButtonClicked(object sender, EventArgs e)
         {
-            _ = _game.RunSequence();
+            await _game.RunSequence();
             _game.EnableButtons();
             await playButton.FadeTo(0);
         }
