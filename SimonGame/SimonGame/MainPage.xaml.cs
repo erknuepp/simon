@@ -1,6 +1,7 @@
 ﻿namespace SimonGame
 {
     using System;
+    using System.Threading.Tasks;
 
     using Xamarin.Forms;
 
@@ -18,42 +19,44 @@
             _buttons[3] = yellowButton;
 
             _game = new GameDriver(_buttons, playButton, roundNumberLabel);
-            _game.DisableButtons();
+            _game.DisableButtons().Wait();
         }
 
         public async void GreenButtonClicked(object sender, EventArgs e)
         {
             GameButtonClicked(sender as Button);
+            await Task.CompletedTask;
         }
 
         public async void RedButtonClicked(object sender, EventArgs e)
         {
             GameButtonClicked(sender as Button);
+            await Task.CompletedTask;
         }
 
         public async void YellowButtonClicked(object sender, EventArgs e)
         {
             GameButtonClicked(sender as Button);
+            await Task.CompletedTask;
         }
 
         public async void BlueButtonClicked(object sender, EventArgs e)
         {
             GameButtonClicked(sender as Button);
+            await Task.CompletedTask;
         }
 
         public async void PlayButtonClicked(object sender, EventArgs e)
         {
             await _game.RunSequence();
-            _game.EnableButtons();
+            await _game.EnableButtons();
             await playButton.FadeTo(0);
         }
 
         private async void GameButtonClicked(Button b)
         {
-            _game.CapturePlayerSequenceTerm(b);
-            _ = _game.GloomAnimation(b);
+            await _game.CapturePlayerSequenceTerm(b);
+            await _game.GloomAnimation(b);
         }
-
-        
     }
 }
